@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import authRouter from './routes/auth';
 
 dotenv.config();
 
@@ -21,4 +22,23 @@ mongoose.connect(process.env.DB as string)
 
 app.listen(6000 , () => {
     console.log("the server is running at port 6000")
+})
+
+app.use('/auth' , authRouter);
+
+app.use((err:any , res:any , req:any , next:any) => {
+
+    const statusCode = err.statusCode || 500 ;
+
+    const message = err.message || "Internal server error"
+
+    return res
+    .status(statusCode)
+    .json({
+        success: false,
+        message,
+        statusCode
+    })
+
+
 })
