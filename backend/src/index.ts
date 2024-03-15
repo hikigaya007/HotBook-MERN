@@ -3,6 +3,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import authRouter from './routes/auth';
+import { Request, Response, NextFunction } from 'express';
 
 dotenv.config();
 
@@ -26,7 +27,7 @@ app.listen(6000 , () => {
 
 app.use('/api/auth' , authRouter);
 
-app.use((err:any , req:any , res:any , next:any) => {
+app.use((err:any , req:Request , res:Response , next:NextFunction) => {
 
     const statusCode = err.statusCode || 500 ;
 
