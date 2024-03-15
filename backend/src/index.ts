@@ -24,9 +24,9 @@ app.listen(6000 , () => {
     console.log("the server is running at port 6000")
 })
 
-app.use('/auth' , authRouter);
+app.use('/api/auth' , authRouter);
 
-app.use((err:any , res:any , req:any , next:any) => {
+app.use((err:any , req:any , res:any , next:any) => {
 
     const statusCode = err.statusCode || 500 ;
 
