@@ -1,9 +1,8 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import authRouter from './routes/auth';
-import { Request, Response, NextFunction } from 'express';
 
 dotenv.config();
 
@@ -11,7 +10,12 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(cors());
+app.use(cors({
+    origin: "*",
+    credentials: true,
+    optionsSuccessStatus: 200,
+}));
+
 
 mongoose.connect(process.env.DB as string)
 .then(() =>{
@@ -21,7 +25,7 @@ mongoose.connect(process.env.DB as string)
     console.log(error)
 })
 
-app.listen(6000 , () => {
+app.listen(3000 , () => {
     console.log("the server is running at port 6000")
 })
 
@@ -37,8 +41,7 @@ app.use((err:any , req:Request , res:Response , next:NextFunction) => {
     .status(statusCode)
     .json({
         success: false,
-        message,
-        statusCode
+        message
     })
 
 

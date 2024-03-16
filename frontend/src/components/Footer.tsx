@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer() {
   return (
-    <div className='bg-blue-800 py-10 '> 
+    <div className='bg-blue-800 py-10 px-2'> 
         <div className='max-w-5xl mx-auto flex justify-between items-center'>
             <span className='text-3xl text-white font-bold tracking-tight'>
                 HotBook
